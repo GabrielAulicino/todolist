@@ -15,8 +15,8 @@ class HeaderComponent extends React.Component{
                 <div className="nav-wrapper">
                     <section className="brand-logo right">{this.props.name}</section>
                     <ul id="nav-mobile" className="left hide-on-med-and-down">
-                        <li> <Link to="novaTarefa"> <p
-                         href={undefined}>Cadastra</p> </Link> </li> 
+                        <li> <Link to="novaTarefa"> <p>Cadastra</p> </Link> </li> 
+                        <li> <Link to="tarefas"> <p>Tarefas</p> </Link> </li> 
                         {/* <li><a href="badges.html">Components</a></li>
                         <li><a href="collapsible.html">JavaScript</a></li> */}
                     </ul>

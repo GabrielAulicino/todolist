@@ -7,6 +7,7 @@ class Tarefas extends Component {
     async componentDidMount() {
         const user = JSON.parse(window.localStorage.getItem("user")).usuario
         const get = await api.get(`/tarefas/${user._id}`)
+        console.log(get.data)
 
         this.setState({ tarefas: get.data })
 
@@ -85,8 +86,10 @@ class Tarefas extends Component {
                         <div className="col m12 ">
                             <div className="card blue-grey darken-1">
                                 <div className="card-content white-text">
+                                   <p>{data.inicio}</p>
                                     <span className="card-title">{data.nome}</span>
                                     <p>{data.descricao}</p>
+                                    <p>{data.terminoPrevisto}</p>
                                 </div>
                                 <div className="card-action">
                                     <Link to={`/editarTarefa/${data._id}`}><button className="btn" >Editar</button></Link>

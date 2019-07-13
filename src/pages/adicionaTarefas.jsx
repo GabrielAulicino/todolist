@@ -1,6 +1,6 @@
 import React from 'react'
 import api from"../service/api"
-
+import "./adicionaTarefa.css"
 
 class CadastrTarefas extends React.Component {
 
@@ -17,6 +17,8 @@ class CadastrTarefas extends React.Component {
             descricao: "",
             inicio: new Date(),
             terminoPrevisto: new Date(),
+            horario:"00:00",
+            data:"2019-08-29",
    
         };
 
@@ -28,25 +30,28 @@ class CadastrTarefas extends React.Component {
 
     
     handleChange(event) {
+        console.log(event.target.value)
         this.setState({ [event.target.name]: event.target.value });
     }
 
     async handleSubmit(event) {
-
         event.preventDefault();
 
-        const formData = {
-            "usuario": this.state.usuario,
-            "nome": this.state.nome,
-            "descricao": this.state.descricao,
-            "terminoPrevisto": this.state.terminoPrevisto,
-            "status": this.state.status
-        }
-        const postApi = await api.post(`/tarefas`, formData)
+        this.formatDate()
+        // event.preventDefault();
 
-        console.log(postApi.data)
+        // const formData = {
+        //     "usuario": this.state.usuario,
+        //     "nome": this.state.nome,
+        //     "descricao": this.state.descricao,
+        //     "terminoPrevisto": this.state.terminoPrevisto,
+        //     "status": this.state.status
+        // }
+        // const postApi = await api.post(`/tarefas`, formData)
 
-        this.props.history.push('/tarefas')
+        // console.log(postApi.data)
+
+        // this.props.history.push('/tarefas')
 
 
   
@@ -74,6 +79,10 @@ class CadastrTarefas extends React.Component {
                         onChange={this.handleChange}
                         placeholder="Digite a descricao da Tarefa"
                     />
+                    <div>
+                        <input type="date" value={this.state.data} onChange={this.handleChange} onSelect={this.handleChange} name="data" />
+                        <input type="time" value={this.state.horario} onChange={this.handleChange} onSelect={this.handleChange} name="horario"   />
+                    </div>
 
                     <button className="btn" type="submit">Adicionar</button>
 
@@ -82,6 +91,23 @@ class CadastrTarefas extends React.Component {
 
             </div>
         );
+    }
+
+    formatDate(){
+        const data= this.state.data.split('-')
+        const hora= this.state.horario.split(':')
+        console.log(data)
+        console.log(hora)
+        const setDate= new Date()
+
+
+        setDate.setDate(parseInt(data[2]))
+        setDate.setMonth(parseInt(data[1])-1 )
+        setDate.setFullYear(parseInt(data[0]))
+        setDate.setHours(parseInt(hora[0]))
+        setDate.setMinutes(parseInt(hora[1]))
+        console.log(setDate.toLocaleDateString())
+
     }
 }
 

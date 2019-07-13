@@ -50,7 +50,7 @@ class Login extends Component {
         return (
             <div className="row fomulario" >
 
-                <form id="new-login" className="col m6" onSubmit={this.handleSubmit()}>
+                <form id="new-login" className="col m6" onSubmit={this.handleSubmit}>
                     <input type="text"
                         name="login"
                         value={this.state.login}
